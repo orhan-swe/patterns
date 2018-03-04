@@ -1,0 +1,21 @@
+@startuml
+
+title singleton pattern
+
+package abstract {
+    class MySingleton {
+        - MySingleton s;
+        - MySingleton();
+        + MySingleton getInstance();
+    }
+    note left
+        getInstance()
+            if(s == null)
+                //lazy loading
+                s = new MySingleton();
+            return s;
+    end note
+}
+
+
+@enduml

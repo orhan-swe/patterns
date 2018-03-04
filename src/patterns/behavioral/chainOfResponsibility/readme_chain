@@ -1,0 +1,12 @@
+ 
+ object has a reference to the upper interface
+ eg next in the line object
+ decouple sender and receiver 
+ sender and receiver dont know about eachother
+ receiver should know about who is next in line successor
+ 
+ examples:
+ 	java.util.logging.Logger#log()
+ 	javax.servlet.Filter#doFilter()
+ 	spring security filter chain
+ 	

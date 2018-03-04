@@ -1,0 +1,91 @@
+title Iterator Pattern
+
+package abstract {
+   interface Iterable {
+        Iterator iterator();
+    }
+    interface Collection extends Iterable {
+         Iterator iterator();
+    }
+    interface List implements Collection{
+         Iterator iterator();
+    }
+    note left
+        the old Enumeration can also be 
+        but more limited support,
+        like no remove()
+    end note
+    interface Iterator {
+        hasNext()
+        next()
+        remove()
+    }
+    class ListIterator extends Iterator {
+        hasNext()
+        next()
+        remove()
+    }
+    
+    Client --> List
+    Client --> Iterator
+    List --> ListIterator
+    
+    class Client
+    note left 
+        java util iterator
+        
+        List<String> books = new ArrayList<>();
+        books.add("All good things");
+         ...
+        
+        Iterator<String> itr = books.iterator();
+        while(itr.hasNext())
+            itr.next();
+            //NOTE: modifing the list, foreach cant do this
+            //also it works for all collections, a generic
+            //for loop using index will not (foreach will ofcourse)
+            itr.remove(); 
+    end note
+}
+package real {
+    interface real.Iterable {
+        Iterator iterator();
+    }
+    class CarRepository implements real.Iterable {
+        Car || cars; //array
+        int index;
+        void addCar(Car car);
+        Iterator iterator();
+    }
+    class CarIterator implements real.Iterator {
+        int curIndex;
+        boolean hasNext();
+        Car next();
+        void remove();
+    }
+    CarRepository *-- CarIterator
+    class CarIterator
+    note left
+        boolean hasNext() 
+            return curIndex < bikes.length && bikes|curIndex| != null; 
+        Car next()
+            return cars|curIndex++|;
+        void remove() 
+            //grab it, nullify it, resize the array...
+    end note
+    
+    class real.Client
+    note left
+        carRepo = new CarRepo();
+        carRepo.addCar(car);
+         ...
+        
+        Iterator<String> itr = carRepo.iterator();
+        while(itr.hasNext())
+            itr.next();
+            itr.remove(); 
+    end note
+    real.Client --> CarRepository
+}
+
+@enduml

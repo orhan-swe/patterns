@@ -1,0 +1,30 @@
+acheave loos coupelign between the objects
+when dealing when well defined set of objects that
+	comunicate in complex ways
+when spagety coade between objects and loose coupeling seems impossible
+	and makes it tuff to create reusable components, this will act as a 
+	hub / router through which all the communication will be routed through
+Design:
+	Interface based (Mediator) with concrete class (ConcreteMediator) so we 
+		can cycle out mediators based on the situation, 
+		but it can be implemented with one class only too
+	example is different envs we are deploying to
+	it minimizes inheritance because it is handling communication rather then classes inheriting 
+		functionality 
+	knows about all colleagues, rather than colleagues knowing about each other
+	Orhan: you inject all objects in to the mediator and now colleagues call it
+		so that he can ether perform some tak or deligate it to some other object,
+		without them knowing about each other
+
+Examples:
+	java.util.Timer (mediates through its schedule methods)
+	java.lang.reflect.Method#invoke() ( mediate objects we are reflecting on)
+	
+Pitfalls:
+	deity objcet (god object), everything to everybody, thight coupeling
+
+often implemented with observer
+	
+Mediator vs observer
+defines interaction/broadcasts
+more specific/more generic

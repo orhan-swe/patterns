@@ -1,0 +1,88 @@
+@startuml
+
+title strategy pattern
+
+package strategy {
+    class CreditCard {
+        boolean isValid();
+    }
+    
+    interface strategy.Strategy {
+        boolean isValid(payInfo);
+    }
+    
+    class VisaStrategy implements strategy.Strategy {
+        boolean isValid(payInfo);
+    }
+    class MasterStrategy implements strategy.Strategy {
+        boolean isValid(payInfo);
+    }
+    class MasterStrategy
+    note right
+        boolean isValid(payInfo) 
+            //visa algorithm
+             ...
+            if(valid)
+                return true
+            return false
+    end note
+    
+    class Client
+    note left
+        card = new CreditCard(new VisaStrategy());
+        sysout("Card is :" + card.isValid());
+    end note
+        
+    
+    CreditCard -right-> strategy.Strategy
+}
+
+package bridge {
+
+    abstract class Payment {
+        +Payment(strategy)
+        abstract boolean isValid()
+    }
+    class bridge.CreditCard extends Payment{
+        boolean isValid();
+    }
+    class bridge.Phone extends Payment{
+        boolean isValid();
+    }
+    class bridge.EMV extends Payment{
+        boolean isValid();
+    }
+    
+    interface bridge.Strategy {
+        boolean isValid(payInfo);
+    }
+    
+    class bridge.VisaStrategy implements bridge.Strategy {
+        boolean isValid(payInfo);
+    }
+    class bridge.MasterStrategy implements bridge.Strategy {
+        boolean isValid(payInfo);
+    }
+   
+    class bridge.MasterStrategy
+    note right
+        boolean isValid(payInfo) 
+            //visa algorithm
+             ...
+            if(valid)
+                return true
+            return false
+    end note
+    
+    class bridge.Client
+    note left
+        payment = new CreditCard(new VisaStrategy());
+        sysout("Payment is :" + payment.isValid());
+    end note
+        
+    
+    Payment -right-> bridge.Strategy
+}
+
+
+@enduml

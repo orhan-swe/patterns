@@ -1,0 +1,29 @@
+very similar to command but empeses on history and state rather then request
+used to externolize the object state usually to provide rollback functionality
+restore object to previos state
+	externolize internal state, so object can be returned to it later
+	undo/redo
+	shields complex internals
+	
+Examples:
+	java.util.Date	(internaly represented by long value, return to
+					previous state by sending it back to that long value
+	java.io.Serializable	allows you to implement any object to have its state
+							recreatable
+
+Design:
+	class based
+	originator
+	caretaker
+	memento
+	magic cookie/token - state stored in new object
+	
+Pitfalls:
+	can be expensive
+	deletes history
+	exposing information
+	
+Memento vs Command
+State captured/request captured
+Independent state/independent request
+Caretaker-History/history side benifit

@@ -1,0 +1,109 @@
+@startuml
+
+title bridge (structural) pattern
+
+package abstract {
+    interface Abstraction {
+        operation()
+    }
+    class RedifinedAbstruction extends Abstraction
+    
+    abstract class Implementor {
+        operationImpl()
+    }
+    Implementor -left-> Abstraction
+    
+    class ConcreteImplentorA extends Implementor
+    class ConcreteImplentorB extends Implementor
+}
+
+package shape {
+
+    abstract class Shape {
+        +Shape(color);
+        +abstract void applyColor()
+    }
+    interface Color {
+        +void applyColor()
+    }
+    
+    class Blue implements Color
+    class Red implements Color
+    class Square extends Shape
+    class Square
+    note right
+        Square(color)
+            this.color = color;
+        void applyColor()
+            //uses composition to apply color
+            color.applyColor();
+    end note
+    
+    Shape -left-> Color
+
+
+    class Client 
+    note right
+        //Old way using inheritance no color obj:
+        Circle circle = new BlueCircle();
+        Square square = new RedSquare();
+        circle.applyColor();
+        square.applyColor();
+        
+        //Using bridge
+        Color blue = new Blue();
+        Shape circle = new Circle(blue);
+        Color red = new Red();
+        Shape square = new Square(red);
+        circle.applyColor();
+        square.applyColor();
+    end note
+}
+
+package movie {
+    class Movie
+    class Details
+    interface Formatter {
+        String format(String header, List details);
+    }
+    abstract class Printer {
+        String print(Formatter);
+        abstract List getDetails();
+        abstract String getHeader();
+    }
+    note right
+        String print(formatter)
+            //bridge in work: "fromatter.format(g..":
+            return fromatter.format(getHeader(), getDetails());
+    end note
+    class PrintFormatter implements Formatter
+    class HTMLFormatter implements Formatter
+    class MoviePrinter extends Printer
+    class MoviePrinter
+    note right 
+        List getDetails() 
+            List details = new..
+            details.add(new Details("Title", movie.getTitle());
+            details.add(new Details("Year", movie.getYear());
+            return details
+    end note
+    MoviePrinter --> Details
+    Printer -right-> Formatter
+    
+    Printer --> Movie
+    
+    class movie.Client
+    note right
+        movie = new Movie();
+        movie.setTitle("Inception");
+        movie.setYear("2011");
+        printFormatter = new PrintFormatter();
+        moviePrinter = new MoviePrinter(movie);
+        printedMaterial = moviePrinter.print(printFormatter);
+        sysout(printFormatter);
+    end note
+    
+}
+    
+
+@enduml

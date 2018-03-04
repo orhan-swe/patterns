@@ -1,0 +1,25 @@
+used when we need to represent state in an application
+localize state behvaior
+seperates what form where
+ocp - open close principle, states are open for extentions
+
+Examplse:
+	none in java api
+	JSF
+	Iterator - not really
+	
+Design
+	abstract class/interface
+	class based
+	context unaware (removes if and elesif)
+	
+Pitfall:
+	must know your states
+	more classes
+	keep logic out of context
+	state change triggers can be harder to identify
+	
+State/Strategy
+interface based/interface based
+transitions/algorithms are independent
+class per state/class per algorithm

@@ -1,0 +1,62 @@
+@startuml
+
+title builder pattern
+
+package abstract {
+    class LunchOrder {
+        String bread;
+        String dressing;
+        String meat;
+    }
+    
+    note left
+        private LunchOrder(LunchOrder.Builder builder) 
+            this.bread = builder.bread;
+                ...
+            return this;
+    end note
+    
+    class LunchOrder.Builder {
+        String bread;
+        String dressing;
+        String meat;
+        +Builder();
+        +Builder bread(bread);
+        +Builder bread(dressing);
+        +Builder bread(meat);
+    }
+    note left
+        //This is a public static inner class
+        //will create an instance of LunchOrder
+        //and inject it self in to LunchOrder constructor
+        2)
+        public Builder (){} //one could have pars here
+        6)
+        public LunchOrder build() 
+            return new LunchOrder(this);
+        4)
+        public Builder bread(bread) 
+            this.bread = bread;
+            return bread;
+    end note
+        
+        
+    
+    LunchOrder +-- LunchOrder.Builder
+    
+    class Client
+    note right
+        //NOTE this solution is much cleaner than using setters of
+        //number of different constructors
+        1)
+        builder = new LunchOrder.Builder();
+        3)
+        builder.bread("Wheat").dressing("Mayo");
+        5)
+        lunchOrder = builder.build();
+    end note
+   
+}
+
+
+@enduml

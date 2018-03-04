@@ -1,0 +1,46 @@
+@startuml
+
+title abstract factory pattern
+
+package abstract {
+    abstract class AbstractFactory {
+        +getFactory();
+        +createProductA()
+        +createProductB()
+    }
+    note left
+        //factory is/can use strategy to decide what
+        //products should be created, here we will decide using if
+        getFactory()
+            if 1
+                return new ConcreteFactory1
+            else if 2
+                return new ConcreteFactory2
+    end note
+    class ConcreteFactory1 extends AbstractFactory {
+        +createProductA()
+        +createProductB()
+    }
+    class ConcreteFactory2 extends AbstractFactory {
+        +createProductA()
+        +createProductB()
+    }
+    abstract class AbstractProduct
+    abstract class AbstractProduct1 extends AbstractProduct
+    class ProductA1 extends AbstractProduct1
+    class ProductB1 extends AbstractProduct1
+    
+    abstract class AbstractProduct2 extends AbstractProduct
+    class ProductA2 extends AbstractProduct2
+    class ProductB2 extends AbstractProduct2
+    
+    ConcreteFactory1 --> ProductA1
+    ConcreteFactory1 --> ProductB1
+    
+    ConcreteFactory2 --> ProductA2
+    ConcreteFactory2 --> ProductB2
+    
+}
+
+
+@enduml

@@ -1,0 +1,67 @@
+@startuml
+
+title strategy pattern
+
+package abstract {
+    class Context {
+        request()
+    }
+    note left
+        request() {
+            //decide what strategy to use
+    end note
+    interface Strategy {
+        execute()
+    }
+    class ConcreteStateA extends Strategy
+    class ConcreteStateB extends Strategy
+    
+    Context *-right-> Strategy
+
+}
+
+package java.Comparator {
+    class Collections {
+        static sort(list, comparator);
+    }
+    interface Comparator
+    class ConcreteComparator extends Comparator
+    Collections *-right-> Comparator
+}
+
+package real {
+    class CreditCard {
+        boolean isValid();
+    }
+    
+    abstract class real.Strategy {
+        abstract boolean isValid(card);
+    }
+    
+    class VisaStrategy extends real.Strategy {
+        boolean isValid(card);
+    }
+    class MasterStrategy extends real.Strategy {
+        boolean isValid(card);
+    }
+    class MasterStrategy
+    note right
+        boolean isValid(card) 
+            //visa algorithm
+             ...
+            if(valid)
+                return true
+            return false
+    end note
+    
+    class Client
+    note left
+        card = new CreditCard(new VisaStrategy());
+        sysout("Card is :" + card.isValid());
+    end note
+        
+    
+    CreditCard *-right-> real.Strategy
+}
+
+@enduml

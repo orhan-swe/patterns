@@ -1,0 +1,66 @@
+@startuml
+
+title factory pattern
+
+package abstract {
+    interface Factory {
+        +create()
+    }
+    class ConcreteFactory extends Factory {
+        +create()
+    }
+}
+
+package real {
+    abstract class real.Calander {
+        +getInstance()
+    }
+    note right
+        getInstance() is not overloaded
+        in subclasses
+    end note
+    
+    class BuddhistCalendar extends real.Calander {
+    }
+    class JapaneseImperialCalendar extends real.Calander {
+    }
+    class Client
+    Client -right-> real.Calander
+}
+
+package WebSite {
+    abstract class WebSite {
+        List pages;
+        + abstract createWebsite();
+        static getWebsite(type);
+        +List getPages();
+    }
+    note right
+        //this method could have been extracted in
+        //anoter class called SiteFactory..
+        static Website getWebsite(type)
+            case "blog"
+                return new Blog();
+    end note
+    
+    class BlogSite extends WebSite {
+        createWebsite()
+    }
+    class BlogSite
+    note right
+        //factory method is overloaded
+        void createWebsite()
+            list.add(new PostPage());
+            list.add(new AboutPage());
+            list.add(new CommentPage());
+    end note
+    
+    class ShopSite extends WebSite {
+        createWebsite()
+    }
+    class WebSite.Client
+    WebSite.Client -right-> WebSite
+}
+
+
+@enduml

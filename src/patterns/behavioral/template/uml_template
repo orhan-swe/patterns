@@ -1,0 +1,50 @@
+@startuml
+
+title template pattern
+
+package abstract {
+    abstract class AbstractBase {
+        +templateMethod();
+        #methodOne()
+        #methodTwo();
+    }
+    note left 
+        templateMethod() {
+            methodOne();
+            methodTwo();
+        }
+    end note
+    
+    class ConcreteClass extends AbstractBase {  
+        #methodOne();
+        #methodTwo();
+    }
+}
+
+package real {
+    class OrderTemplate {
+        processOrder() 
+        abstract doCheckout()
+        abstract doPayment()
+        abstract doDelivery()
+            }
+    note left 
+        processOrder () {
+            doCheckout()
+            doPayment()
+            doDelivery
+    end note
+    
+    class WebOrder extends OrderTemplate {
+        doCheckout()
+        doPayment()
+        doDelivery()
+    }
+    class StoreOrder extends OrderTemplate {
+        doCheckout()
+        doPayment()
+        doDelivery()
+    }
+}
+
+@enduml

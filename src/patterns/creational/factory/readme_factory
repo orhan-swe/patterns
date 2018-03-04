@@ -1,0 +1,31 @@
+
+often used to get a unique instance of same object (prototype)
+
+concept
+		doesnt expose instantiation logic
+		defer to subclasses
+		common interface
+		specified by architect, implemented by user
+		
+java examples
+	Calander
+	resourceBundle
+	NumberFormat 
+	
+Desing
+	Responsible for lifecycle
+	Common interface
+	Concrete classes
+	Parameterized create method
+	
+Pitfalls
+	complexity
+	creation usually in subclass
+	usually not refactored in to
+	
+Factory/Singleton
+returns various instances/returnes same instance
+	multiplbe constructors/on constructor, no args
+contract drivern/no interface
+subclasses/no subclasses
+adaptable to environment easily/**

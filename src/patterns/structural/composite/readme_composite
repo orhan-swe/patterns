@@ -1,0 +1,20 @@
+Concepts
+	deals with tree structures of information
+	components represent part or whole structure
+	meant to treat components the same 
+	compose objects into tree structures
+	you can treat individual object as a composite
+	some operation applied on individual and composites
+	
+Examples:
+	java.awt.Component
+	JSF widgets
+	RESTfull services GETs
+	
+Design
+	Tree structure
+	Leaf of composite, same operations
+	composite knows about child objects
+	component, leaf, composite
+	
+	

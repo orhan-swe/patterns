@@ -1,0 +1,132 @@
+@startuml
+
+title VisitorPattern
+
+package visitor.pattern {
+interface VehicleVisitor{
+void visit(Car car);
+void visit(Plane plane);
+void visit(Boad boat);
+}
+
+class AddTransportVisitor
+note right
+    4)
+    public void visit(Plane plane) {
+        manager.add(plane);
+    }
+end note
+
+abstract class Vehicle{
++abstract void accept(VehicleVisitor);
+}
+
+class Car
+class Boat
+class Plane
+note left
+3)
+public void accept(VehicleVisitor visitor) {
+        visitor.visit(this);
+    }
+end note
+class VehicleManager
+note right
+    private ArrayList<Vehicle> allVehicles = new ArrayList<>();
+    private List<Car> carList = new ArrayList<>();
+    private List<Boat> boatList = new ArrayList<>();
+    private List<Plane> planeList = new ArrayList<>();
+    private AddTransportVisitor addVisitor = new AddTransportVisitor(this);
+     ...
+    2)
+    public void add(Vehicle vehicle) {
+        allVehicles.add(vehicle);
+        vehicle.accept(addVisitor);
+    }
+    5)
+    public void add(Plane plane) {
+        boatList.add(plane);
+    }
+     ...
+     7)
+    public void printAllPlanes() {for (planeList)...}
+    public void printAllVehicles() {for (allVehicles)...}
+
+end note
+
+
+Vehicle <|-- Car
+Vehicle <|-- Boat
+Vehicle <|-- Plane
+
+VehicleVisitor <|-- AddTransportVisitor
+Vehicle --> VehicleVisitor
+
+Car <-- VehicleVisitor
+Boat <-- VehicleVisitor
+Plane <-- VehicleVisitor
+
+VehicleManager --> AddTransportVisitor
+VehicleManager <-- AddTransportVisitor
+VehicleManager --> Vehicle
+
+class Main
+note right
+  VehicleManager manager = new VehicleManager();
+  Vehicle vehicle1 = new Plane();
+    ...
+    1)
+  manager.add(vehicle1);
+  manager.add(vehicle2);
+   ...
+  6)
+  manager.printAllPlanes();
+  manager.printAllVehicles();
+end note
+}
+
+package original {
+class OMain
+note left
+    OVehicleManager manager = new OVehicleManager();
+    OVehicle vehicle1 = new OPlane();
+     ...
+    2)
+    manager.add(vehicle1);
+    manager.add(vehicle2);
+     ...
+    3)
+    manager.printAllPlanes();
+    manager.printAllVehicles();
+end note
+class OCar
+class OBoat
+class OPlane
+abstract class OVehicle
+OVehicle <|-- OCar
+OVehicle <|-- OBoat
+OVehicle <|-- OPlane
+class OVehicleManager
+note right
+    privateArrayList<OVehicle> allVehicles = new ArrayList<>();
+    private List<OCar> carList = new ArrayList<>();
+    private List<OBoat> boatList = new ArrayList<>();
+    private List<OPlane> planeList = new ArrayList<>();
+     ...
+    2)
+    public void add(OVehicle vehicle) {
+	    allVehicles.add(vehicle);
+        if (vehicle instanceof OCar) {
+            carList.add((OCar) vehicle);
+        } else if (vehicle instanceof OBoat) 
+            boatList.add((OBoat) vehicle);
+        } else if (vehicle instanceof OPlane) {
+            planeList.add((OPlane) vehicle);
+    }
+    4)
+    public void printAllPlanes() {for (planeList)...}
+    public void printAllVehicles() {for (allVehicles)...}
+end note
+OVehicleManager --> OVehicle
+}
+@enduml

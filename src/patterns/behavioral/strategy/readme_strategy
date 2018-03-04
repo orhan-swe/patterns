@@ -1,0 +1,25 @@
+Concepts:
+	eliminate conditional statements
+	behavior encapsulated in classes
+	difficult to add new strategy
+	client aware of strategies
+	client chooses strategy
+	
+Examples:
+	java.util.Comparator
+	
+Design
+	abstract base class
+	concrete class per strategy
+	removes if/else from application
+	strategies are independent
+	
+Pitfals:
+	client aware of strategies
+	more classes
+	
+Strategy/State
+client know about all strategies/client does not know about states
+alg independent/transitions
+class per alg/class per state
+	

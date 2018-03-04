@@ -1,0 +1,26 @@
+used to represent and define (establish and interprit) the gramer of a language
+to parse veriase aspects of the grammer
+building expression on top of one another
+but has next to nothing to do with parsing
+grammer could be music notation or math equations
+or another language
+compilers will use it to parse source code
+map a domain specific language
+used to define an Abstract Syntax Tree(AST)
+relies on the recursive traversal of the Composite pattern
+replaces if and switch statements, a solution that would not
+be sustainable
+
+pitfals:
+	complex
+	specific case
+
+Iterpreter vs visitor
+access to properties/needs observer functionality
+function as methods/functionality found in one place
+adding neew functionality changes every variant/
+adding new variant requires changing every visitor
+
+Examples:
+	java.util.Pattern (used for compiler regular expression)
+	java.text.Format (used for dates, numbers and strings (local sensitive))

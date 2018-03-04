@@ -1,0 +1,22 @@
+great for navigation without exposing the structure of the object
+efficiant way to traverse a container
+decouples the data from the algorithms
+sequentialn
+interface based
+factory method based
+
+pitfalls
+	no access to index
+	directional (although list iterator can go back)
+	
+
+iterator vs for loop
+interfacebasedn/traversal in client
+algorirhm is removed
+no index/exposes index
+concurrent modification
+	
+
+example
+	java.util.Iterator
+	java.util.Enumeration

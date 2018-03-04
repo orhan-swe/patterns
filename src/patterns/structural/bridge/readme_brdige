@@ -1,0 +1,25 @@
+concepts
+	used on new code to decouple abstruction and implementation
+	encapsulation, composition, inheritance
+	changes in abstraction wont affect client
+	details wont be right but client will not change later..
+	
+Examples:
+	Driver
+	JDBC driver
+	
+Design
+	a bit more complex then adaptor
+	interfaces and abstract classes
+	composition over inheritance emphesys
+	but more than just composition
+	
+Pitfalls
+	increases complexity
+	conceptually difficult to plan
+	more than just inheritance and abstruction
+	
+Bridge/Adapter
+designed upfront/works after code is designed
+abstraction and inplementation vary/legacy
+complex/provides different interface

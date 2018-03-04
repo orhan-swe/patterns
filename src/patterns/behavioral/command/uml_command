@@ -1,0 +1,108 @@
+title Command Pattern
+
+package Command.pattern {
+
+    class Client
+    class Invoker
+    abstract class Command {
+        void execute();
+    }
+    class Receiver {
+        action();
+    }
+    class ConcreteCommand {
+        execute();
+        state;
+    }
+    Invoker *-- Command
+    Command <|-- ConcreteCommand
+    Receiver <-- ConcreteCommand
+    Client --> ConcreteCommand
+    Client --> Receiver
+}
+
+package realUseRunnable {
+    
+    class Client1
+    note right
+    taks1 = new Task(1,4); // encapsulate the request
+    taks2 = new Task(1,4); // encapsulate the request
+    thread1 = new Thread(task1);
+    thread1.start(); //invoker
+    end note
+        
+    class Task
+    note right
+        void run()
+            sysout(num1*num2); //receiver would be console
+    end note
+    
+    Runnable <|-- Task
+}
+
+package real2 {
+    class client2
+    note left
+        bedroomLight = new Light();
+        kitchenLight = new Light();
+        lightsList.add(bedroomLight, kitchenLight);
+        switch = new Switch();
+        
+        //the client will issue a command instead of calling light.on
+        //this makes it possible for command to manage state and
+        //can will be run as a callback
+        toggleLightCommand = new ToggleLightCommand(kitchenLight);
+        lightSwithc.storeAndExecute(toggleLightCommand); //on
+        lightSwithc.storeAndExecute(toggleLightCommand); //off 
+        
+        allLightsOff = new AllLightsCommand(lightsList);
+        lightSwithc.storeAndExecute(allLightsOff); //all off
+        
+    end note
+    
+    class Light {
+        void toggle();
+        void on();
+        void off();
+    }
+    note left
+    Receiver
+    end note
+    class Switch {
+        void storeAndExecute(command);
+    }
+    note left
+    Invoker
+    //will store and execute command
+    //and does not know about the light at all
+    // so it is decoupled from light
+    //another example would be logic calling draw method on ui
+    end note
+    
+    class ToggleLightCommand implements Command1 {
+        void execute()
+    }
+    class ToggleLightCommand
+    note right 
+        void execute()
+            light.toggle()
+    end note
+    
+    ToggleLightCommand --> Light
+    
+    class AllLightsCommand implements Command1 {
+        List allLights;
+        void execute()
+    }
+    class AllLightsCommand
+    note right 
+        void execute()
+            for(..allLights)
+                if(on)
+                    light.toggle()
+    end note
+    AllLightsCommand --> Light
+    
+    Switch --> Command1
+}
+@enduml

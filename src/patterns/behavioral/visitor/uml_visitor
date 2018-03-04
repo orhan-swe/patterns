@@ -1,0 +1,39 @@
+@startuml
+
+title visitor pattern
+
+package abstract {
+    interface Visitor {
+        visit(element1)
+        visit(element2)
+    }
+    class ConcreteVisitor implements Visitor{
+        visit(element1);
+        visit(element2)
+    }
+    class ConcreteVisitor
+    note left
+        visit(element1)
+            //use element1 one
+    end note
+    class Client
+    interface Element {
+        accept(visitor)
+    }
+    class ConcreteElement1 implements Element {
+        accept(visitor);
+    }
+    class ConcreteElement1
+    note left
+        accept(visitor)
+            visitor.visit(this);
+    end note
+    
+    Client --> Element
+    Client --> Visitor
+    Visitor <-- Element
+   
+}
+
+
+@enduml

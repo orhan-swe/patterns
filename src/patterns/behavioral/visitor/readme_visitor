@@ -1,0 +1,24 @@
+
+separate algorithm from object structure
+
+Concepts:
+	sep alg form obj structure
+	adding new feature
+	maintaim open/close principle
+	visitor changes
+	
+Design
+	Interface based
+	Visitor and Element
+	Elements have visit method
+	Visitor knows every Element
+
+pitfalls
+	plan for adaptability that may not be needed
+	indirection somewhat confusing
+	adapter pattern should be used when not all methods needed
+	
+Visitor/iterator
+interface based/interface based usually impl using a anonymous class
+externalized changes/encapsulates navigation
+multiple visitors/usually singular

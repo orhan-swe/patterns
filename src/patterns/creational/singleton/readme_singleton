@@ -1,0 +1,28 @@
+Concept:
+	only one instance created
+	lazily loaded
+
+Examples:
+	runtime
+	logger
+	spring beans
+	graphic managers
+	
+Design:
+	on class
+	static in nature
+	mulithread considerations
+	private instance and constructor
+	
+Pitfalls
+	overused
+	difficut to unit test in java due to private
+	not thread safe by default
+	constructor can not have parameters, becomes factory
+	
+Singleton
+same instance all the time/several instances
+no args/multiple constructors
+no interface/interface driven
+####/adapts to env more easily
+	

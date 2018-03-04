@@ -1,0 +1,87 @@
+title Mediator Pattern
+
+package abstract {
+   class ConcreteMediator implements Mediator
+   class ConcreteColleague1 implements Colleague
+   class ConcreteColleague2 implements Colleague
+   
+   Mediator <-- Colleague
+   ConcreteMediator --> ConcreteColleague1
+   ConcreteMediator --> ConcreteColleague2
+   
+   class Client
+   Client --> ConcreteMediator
+}
+
+package real {
+    
+    interface real.Command {
+        void execute();
+    }
+    note right 
+        all commends will be colleagues
+    end note
+    
+    class real.LightMediator {
+        List lights;
+        void registerLigth(Light l);
+        void turnOnAllLights();
+        void turnOffAllLights();
+        void toggleLight();
+    }
+    note left
+        registerLight(light) -> lights.add(light);
+        toggleLight()
+            mediator.toggleLight;
+        turnOnAllLights()
+            for (lights) 
+                if(!isOn())
+                    light.toggle()
+    end note
+    
+    class real.ToggleLightCommand implements real.Command {
+        void execute()
+    }
+    class real.ToggleLightCommand
+    note right 
+        void execute()
+            med.toggleLight();
+    end note
+    class real.AllLightsOnCommand implements real.Command {
+        void execute()
+    }
+    class real.AllLightsOnCommand
+    note right 
+        void execute()
+            med.turnOnAllLights();
+    end note
+    class real.AllLightsOffCommand implements real.Command {
+        void execute()
+    }
+    
+    class real.Client
+    note right
+        lightMediator = new LightMediator();
+        bedroomLight = new Light("bedroom");
+        kitchenLight = new Light("kitchen");
+        mediator.registerLight(bedroomLight, kitchenLight);
+        
+        Command turnOnAllLightsCommand = new TurnOnAllLightsCommand(lightMediator);
+        turnOnAllLIghtsCommand.execute();
+        
+        Command turnOffAllLightsCommand = new TurnOffAllLightsCommand(lightMediator);
+        turnOffAllLIghtsCommand.execute();
+    end note
+    note left 
+        in this example Mediator does not know about colleagues, 
+        but that can be added in case they depend on each other
+        in some way
+        instead commands do not know about lights anymore
+    end note
+    
+    real.LightMediator <-- real.Command
+    real.Light <-- real.LightMediator
+    
+}
+
+@enduml

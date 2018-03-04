@@ -1,0 +1,27 @@
+@startuml
+
+title prototype pattern
+
+package abstract {
+    interface Prototype {
+        +clone()
+    }
+    class ConcretePrototype1 extends Prototype {
+        +clone()
+    }
+    class ConcretePrototype1
+    note left
+        returns copy of it self
+    end note
+    
+    class client
+    note left 
+        o = prototype.clone()
+    end note
+    
+    client -right-> Prototype
+   
+}
+
+
+@enduml

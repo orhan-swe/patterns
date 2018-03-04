@@ -1,0 +1,28 @@
+
+often used to get a unique instance of same object (prototype)
+
+concept
+	avoids costly creation
+	avoids subclassing
+	typically don't use "new"
+	often utilizes an Interface
+	usually implemented with a Registry
+
+Design
+	clone/cloneable
+	avoids keyword "new"
+	although a copy, each instance is unique
+	costly construction not handled by client 
+	can use shallow(emidiet properties) or deep(references also) copy
+
+Pitfalls:
+	not clear when to use
+	usually used with another pattern
+		registry
+	shallow vs deep copy
+	
+Prototype/Factory
+light weight construction/flexible objects
+	copy constructor or clone/multiple constructors
+shallow or deep/concrete instance
+copy of itself/fresh instance

@@ -1,0 +1,73 @@
+title COR
+
+package ChainOfResponsibility.pattern {
+class Client
+interface Handler
+class ConcreteHandler1
+class ConcreteHandler2
+class ConcreteHandler3
+
+Client --> Handler
+Handler <|-- ConcreteHandler1
+Handler <|-- ConcreteHandler2
+Handler <|-- ConcreteHandler3
+Handler --* ConcreteHandler3
+}
+
+package real {
+class Director
+note left 
+handleRequest(request)
+    if(type== conferance){
+        approve;
+    else
+        successor.handleRequest(request);
+end note
+class VP
+note left 
+handleRequest(request)
+    if(amount < 1500){
+        approve;
+    else
+        successor.handleRequest(request);
+end note
+class CEO
+note left
+handleRequest(request)
+    approve
+end note
+class Request {
+    type;
+    amount;
+}
+
+abstract class AHandler {
+    Handler successor;
+    void setSuccessor(AHandler successor);
+    
+    abstract void handleRequest(Request request);
+}
+
+AHandler <|-- Director
+AHandler --* Director
+AHandler <|-- VP
+AHandler <|-- CEO
+
+class Main
+note right
+director = new Director()
+VP = new VP()
+CEO = new CEO()
+director.setSuccessot(VP);
+VP.setSuccessor(CEO);
+
+//now all request can got to director 
+//and will be handled automatecly higer up in chain
+// one problem is that we can not verify that request has been handled
+//similar to command pattern but command is trackable 
+
+end note
+
+}
+
+@enduml

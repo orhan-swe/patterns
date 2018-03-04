@@ -1,0 +1,30 @@
+decoupeling pattern when we have subject that needs to 
+	be observed by one or more observers
+	
+concepts:
+	one to many observers
+	decoupled
+	event handling
+	pub/sub although pub/sub is asynch and observer is synch
+	mostly used in mvc
+	
+Examples
+	java.util.Observer
+	java.util.EventListener
+	javax.jsm.Topic
+	
+Design:
+	Subject - inteface/abstract that we make concreate implns of
+	Observer - interface based with verous concrete implementations
+	Views are Observers in even driver app
+	
+Pitfalls:
+	Unexpected update
+	Large size consequences
+	what changed?
+	debugging can be difficult
+
+Observer/Mediator
+One-to-many/One-to-one-to-Many
+Decoupled/decoupled
+broadcast communication/Complex Communication in more direct model

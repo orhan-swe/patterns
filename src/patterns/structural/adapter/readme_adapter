@@ -1,0 +1,30 @@
+concepts
+	connect new code with legacy code
+	plug adaptor
+	conver interface into another interface
+	legacy
+	translates requests
+	client, adapter, adaptee
+	
+examples
+	arrays -> lists
+	streams
+	
+design
+	client centric
+	integrate new with old
+	interface, but not required
+	adaptee can be the implementation
+	can provide multiple adapters
+	
+Pitfalls
+	dont complicate
+	muliple adapters
+	dont add functionality
+	
+Adapter/Bridge
+works after code is designed/designed upfront
+legacy/build in advanced
+retrofitted
+provides different interface
+

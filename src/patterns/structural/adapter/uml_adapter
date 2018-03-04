@@ -1,0 +1,61 @@
+@startuml
+
+title adaptor (structural) pattern
+
+package arrayToList {
+       class Client
+       note left
+        Integer[] a = new Integer[]{1,2};
+        List<Integer> l = Arrays.asList(a);
+        end note
+       interface List
+       class ArrayListAdapter implements List
+       class ArrayListAdapter
+       note left
+            Adapter
+        end note
+       class Arrays{
+            static List asList(array);
+        }
+        class Array
+        note right 
+            Adaptee
+        end note
+        Client -right-> Arrays
+        Arrays --> List
+       ArrayListAdapter -right-> Array
+    
+}
+
+package real {
+    interface Employee {
+        getName();
+        getMail();
+    }
+    class EmployeeDB implements Employee
+    class EmployeeLdap 
+    note left
+        Adaptee
+    end note
+    class EmployeeAdapter extends Employee
+    class EmployeeAdapter
+    note left
+        Adapter
+    end note
+    
+    EmployeeAdapter -right-> EmployeeLdap
+    
+    
+    class real.Client
+    note right
+        employeeDB = new EmployeeDB(...);
+        employees.add(employeeDB);
+        employeeLdap = new EmployeeLdap(...);
+        //employeeLdap does not implement employee interface
+        //so we need an adapter:
+        employeeAdapter = new EmployeeAdapter(employeeLdap);
+        employees.add(employeeAdapter);
+    end note
+}
+
+@enduml

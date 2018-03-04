@@ -1,0 +1,72 @@
+@startuml
+
+title state pattern
+
+package abstract {
+    class Context
+    interface State {
+        handle()
+    }
+    class ConcreteStateA extends State
+    class ConcreteStateB extends State
+    
+    Context *-right-> State
+
+}
+
+package real {
+    class real.Fan {
+        State offState;
+        State lowState;
+        State medState;
+        State highState;
+        State currentState;
+        void pullChain();
+        String toString();
+        State getFanOffState();
+        State getFanLowState();
+        State getFanMedState();
+        State getFanHighState();
+        void setState(state);
+    }
+    note right 
+        void pullChain()
+            currentState.handleRequest();
+    end note
+    interface real.State {
+        void handleRequest();
+    }
+    class real.FanOffState extends real.State
+    class real.FanLogState extends real.State
+    class real.FanMedState extends real.State
+    class real.FanHighState extends real.State
+    
+    class real.FanHighState
+    note right
+        void handleRequest() 
+            //imaginary hardware
+            fanSystem.low(); 
+            fan.setState(fan.getFanLowState());
+    end note
+    
+    real.Fan *-right-> real.State
+    real.FanOffState --> real.Fan
+    
+    class OldFan {
+        void pullChain();
+    }
+    note right
+        void pullChain() 
+            if(state == OFF)
+                //imaginary hardware
+                fanSystem.low; 
+                state = Low;
+            else if (state == LOW)
+                fanSystem.med;
+                state = Med;
+             ...
+    end note
+        
+}
+
+@enduml

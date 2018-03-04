@@ -1,0 +1,26 @@
+create objects that may contain a lot of prameters and make it immutable
+
+Concepts:
+	handles complex construction
+	large number of parameters
+	
+Examples
+	StringBuilder
+	DocumentBuilder
+	Locale.Builder
+	
+Design
+	flexibility over telescoping constructors
+	static inner class
+	calls appropriate constructor
+	
+Pitfalls
+	inner static class
+	designed first (usually no refactor)
+	complexity
+	
+Builder/Prototype
+handles complex constructors/implemented around a clone
+no interface needed/avoids calling complex constructors
+can be a seperate class/difficult to implement in legacy
+works with legacy

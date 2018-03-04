@@ -1,0 +1,91 @@
+title Interpreter Pattern
+
+package abstract {
+    class Client
+    class Context
+    abstract class AbstractExpression {
+        interpret(Context);
+    }
+    class TerminalExpression extends AbstractExpression {
+        interpret(Context);
+    }
+    class NonterminalExpression extends AbstractExpression {
+        interpret(Context);
+    }
+    
+    Client --> Context
+    Client --> AbstractExpression
+    AbstractExpression --* NonterminalExpression
+}
+
+package real {
+
+    interface real.Expression {
+        boolean interpret(String context);
+    }
+    
+    class real.TerminalExpression implements real.Expression {
+        String data; //const injected
+        boolean interpret(String context);
+    }
+    class real.TerminalExpression
+    note right
+        booleant interpret(String str) 
+            StringTokenizer(str);
+            while(toknzer.hasMoreTokens()) 
+                if(nextToken.equals(data)
+                    return true;
+            return false;
+    end note
+    
+    class real.OrExpression implements real.Expression {
+        Expression ex1;
+        Expression ex2;
+        boolean interpret(String context);
+    }
+    class real.OrExpression
+    note right
+        //composition recursion
+        booleant interpret(String str) 
+            return expr1.interpret(context) || expr2.interpret(context);
+    end note
+    class real.Expression --* real.OrExpression
+    
+    class real.AndExpression implements real.Expression {
+        Expression ex1;
+        Expression ex2;
+        boolean interpret(String context);
+    }
+    class real.AndExpression
+    note right
+        //composition recursion
+        boolean interpret(String str) 
+            return expr1.interpret(context) && expr2.interpret(context);
+    end note
+    class real.Expression --* real.AndExpression
+    
+    
+    class real.Client
+    note left
+        String context = "Sweden";
+        
+        Expression terminal1 = new TerminalExpression("Sweden");
+        Expression terminal2 = new TerminalExpression("France");
+        Expression terminal3 = new TerminalExpression("Germany");
+        
+        //Sweden and France
+        Expression alternation1 = new AndExpression(terminal1, terminal2);
+        
+        //Germany or ( Sweden and France )
+        Expression alternation2 = new OrExpression(terminal3, alternation1);
+        
+        //France and (Germany or (Sweden and France))
+        Expression alternation3 = new AndExpression(terminal2, alternation2);
+        
+        sysout(context + " is " + define.interpret(context);
+    end note
+    
+}
+
+
+@enduml

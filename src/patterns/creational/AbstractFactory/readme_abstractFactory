@@ -1,0 +1,25 @@
+Concept
+	Factory of Factories
+	factory of related objects
+	common interface 
+	defer to subclasses
+	
+Examples:
+	DocumentBuilder
+	Frameworks
+	
+Design
+	group factories together
+	factory is responsible for lifecycle
+	common interface
+	concrete classes
+	param create method
+	composition
+	
+Pitfalls
+	compplexity
+	runtime swithc
+	pattern within a pattern
+	problem specific
+	may start with factory
+	

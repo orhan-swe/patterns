@@ -1,0 +1,89 @@
+title Memento Pattern
+
+package abstract {
+  
+    class Originator {
+        state
+        setMemento();
+        createMemento()
+    }
+    note right
+        object we need to create a copy of
+    end note
+    
+    class Memento {
+        state
+        getState()
+        setState()
+    }
+     note right
+        captured state of originator is stored in memento
+    end note
+    class Caretaker
+    note right
+        stores mementos, knows why and when memento needs to be saved
+        and how to restore itself
+    end note
+    
+    Memento <--* Caretaker
+    Memento <-- Originator
+   
+    
+}
+
+package real {
+    class real.Employee {
+        name;
+        phone;
+        
+        EmployeeMemento save();
+        void revert(employMemento);
+        setters/getters();
+    }
+    note right
+        EmployeeMemento save() 
+            return new EmployeeMemento(name, phone);
+        void revert(employeeMemento) 
+            name = employeeMemento.getName();
+            phone = employeeMemento.getPhone();
+    end note
+    class real.EmployeeMemento {
+        name;
+        phone;
+        
+        EmployeeMemento save();
+        void revert(employMemento);
+        getters();
+    }
+    
+    class real.EmployeeMementoCaretaker {
+        Stack employeeHistory;
+        void save(employee)
+        void revert(employee);
+    }
+    note right
+        Stack employeeHistory;
+        void save (employee)
+            employeeHistory.push(employee.save());
+        void revert (employee)
+            employee.revert(employeeHishtory.pop());
+    end note
+    
+    class real.Client
+    note left
+        {new emp, caretaker}
+        emp.setName("Jack");
+        ..
+        caretaker.save(emp);
+        emp.setName("Jack the man");
+        caretaker.save(emp);
+        emp.setName("Jack the cool"); 
+        //note: no save below, if we did save first the name would stay same
+        caretaker.revert(emp);  //the name will be "Jack the man"
+        caretaker.revert(emp);  //the name will be "Jack"
+    end note
+    real.EmployeeMemento <-- real.Employee
+    real.EmployeeMemento <--* real.EmployeeMementoCaretaker
+}
+
+@enduml

@@ -1,0 +1,19 @@
+Concepts:
+	code reuse
+	very common
+	IoC (hooks are only called by super class)
+
+Design
+	 abstract base class
+	 base calls child by calling hook methods
+	 hooks are usually overridden
+	 
+pitfall:
+	restrict access
+	confusing hierarchy
+	different program flow
+	
+Template method
+	same algorithm/ alg per strategy
+	class based/ interface based 
+	compiled time / run time(select while using app)

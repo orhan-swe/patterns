@@ -1,0 +1,87 @@
+title Observer pattern
+
+@startuml
+package abstract {
+    abstract class SubjectObservable {
+        List observerCollection
+        attach(Observer)
+        detach(Observer)
+        notify()  //call update on all observers
+    }
+    
+    class ConcreteSubject extends SubjectObservable
+    
+    interface Observer {
+        update()
+    }
+    class ConcreteObserver implements Observer {
+        observerState
+        update()
+    }
+    Observer <-- SubjectObservable
+
+}
+package real {
+    abstract class real.SubjectObservable {
+        List observers
+        abstract void setState(String);
+        abstract String getState();
+        void attach(observer);
+        void detach(observer);
+        void notifyObservers();
+    }
+        
+    
+    class real.MessageStream extends real.SubjectObservable {
+        Deque messageHistory
+    }
+    class real.MessageStream
+    note left
+        setState(message)
+            messageHistory.add(message);
+            this.notifyObservers();
+        getState()
+            return messageHistory.getLast();
+    end note
+    
+    abstract class real.Observer {
+        SubjectObservable subject;
+        abstract void update();
+    }
+    note right
+        note the reference to SubjectObservable
+            so it can get state from it!
+            it is missing in java.util.Observer
+            in real world we would probably use 
+            a mediator to talk to SubjectObservable
+        and now observer can add itself to 
+            SubjectObservable
+    end note
+    real.Observer <--> real.SubjectObservable
+    
+    class real.PhoneClient extends real.Observer{
+        void update()
+    }
+    class real.PhoneClient
+    note right
+        //This is a "phoneclient" that will be listeneing to
+        //twitter updates, the observable will be injected
+        //in constructor, the SubjectObservable will call
+        //the update below
+        
+        void update()
+            window.show(subject.getState());
+    end note
+    
+    class real.Client
+    note left 
+        subject = new MessageStream()
+        phoneClient = new PhoneClient(subject);
+        subject.setState("Here is a new message!");
+        subject.setState("Here is one more message!");
+        //NOTE: you could also instead do something like:
+        //phoneClient.addMessage("message");
+    end note
+
+}
+@enduml

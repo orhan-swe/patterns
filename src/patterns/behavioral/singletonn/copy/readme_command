@@ -1,0 +1,34 @@
+Encapsulate request as an object
+very similar to memento but emphasis on request
+object oriented callback
+decouple invoker (sender) from receiver (processor)(one of key reasons for use)
+when decoupling ui from login 
+logic may be invoker and ui processor
+often used for undo functionality as one can store state in command
+usually used with other patterns 
+ if duplicating logic in another command use composite or 
+ combine with chainOfResponsibility
+ for undo try to combine with momento
+ if storing history look at prototype to store in a list
+ 
+ Command vs strategy:
+ object (request) per command/strategy
+ contains what/how
+ encapsulates action/algorithm
+ 
+ otherwise can look very similar
+ 
+ 
+ 
+examples:
+	java.lang.Runnable
+	javax.swing.Action
+	
+	
+Desing
+Pbject per command
+command interface
+exute method
+unexecute method
+reflection may be used for uncoupleing
+command, invoker, concreteCommand
